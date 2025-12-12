@@ -10,6 +10,10 @@ pipeline {
         ansicolor('xterm')
     }
 
+    parameters {
+        choice(name: 'CHOICE', choices: ['apply', 'destroy'], description: 'Pick something')
+    }
+
     stages {
         stage('Init') {
             steps {
@@ -28,16 +32,21 @@ pipeline {
             }
         }
         stage('Deploy') {
-            input {
-                message "Do you want to proceed with the deployment?"
-                ok "Deploy"
+            when {
+                expressions {
+                    expression { params.CHOICE == 'apply' || params.CHOICE == 'destroy'
+                }
+            
+            
             }
+            
             steps {
                 sh """
                 cd 00-VPC
-                terraform apply -auto-approve
+                terraform $params.CHOICE -auto-approve
                 """
             }
+
         }
     }
 }
