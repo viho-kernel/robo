@@ -1,0 +1,43 @@
+pipeline {
+    agent{
+        node {
+            label 'Agent-1'
+        }
+    }
+
+    options {
+        timeout(time: 1, unit: 'MINUTES')
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Init') {
+            steps {
+                sh """
+                cd 00-VPC
+               terraform init -reconfigure
+                """
+            }
+        }
+        stage('plan') {
+            steps {
+                sh """
+                cd 00-VPC
+                terraform plan
+                """
+            }
+        }
+        stage('Deploy') {
+            input {
+                message "Do you want to proceed with the deployment?"
+                ok "Deploy"
+            }
+            steps {
+                sh """
+                cd 00-VPC
+                terraform apply -auto-approve
+                """
+            }
+        }
+    }
+}
