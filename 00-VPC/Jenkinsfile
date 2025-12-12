@@ -33,20 +33,14 @@ pipeline {
         }
         stage('Deploy') {
             when {
-                expressions {
-                    expression { params.CHOICE == 'apply' || params.CHOICE == 'destroy'
-                }
-            
-            
+                    expression { params.CHOICE == 'apply' || params.CHOICE == 'destroy' }
             }
-            
             steps {
                 sh """
                 cd 00-VPC
                 terraform $params.CHOICE -auto-approve
                 """
             }
-
         }
     }
 }
