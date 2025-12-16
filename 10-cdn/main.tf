@@ -45,11 +45,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   restrictions {
     geo_restriction {
       restriction_type = "whitelist"
-<<<<<<< HEAD
-      locations        = ["US", "CA", "GB", "DE"]
-=======
       locations        = ["US", "CA", "GB", "DE", "IN"]
->>>>>>> 41070bd (latest commit)
     }
   }
   tags = merge(
@@ -64,19 +60,11 @@ resource "aws_cloudfront_distribution" "cdn" {
 }
 
 
-<<<<<<< HEAD
-resource "aws-aws_route53_record" "cdn" {
-    zone_id = var.zone_id
-    name = "web-cdn.${var.zone_name}"
-    type = "A"
-    alias   = {
-=======
 resource "aws_route53_record" "cdn" {
     zone_id = var.zone_id
     name = "web-cdn.${var.zone_name}"
     type = "A"
     alias {
->>>>>>> 41070bd (latest commit)
         name    = aws_cloudfront_distribution.cdn.domain_name
         zone_id = aws_cloudfront_distribution.cdn.hosted_zone_id
         evaluate_target_health = true

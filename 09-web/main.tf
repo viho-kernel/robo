@@ -169,11 +169,8 @@ resource "aws_autoscaling_group" "web" {
 }
 
 resource "aws_lb_listener_rule" "web" {
-<<<<<<< HEAD
-  listener_arn = data.aws_ssm_parameter.web_alb_listener_arn.value
-=======
   listener_arn = data.aws_ssm_parameter.frontend_alb_listener_arn.value
->>>>>>> 41070bd (latest commit)
+
   priority     = 10
 
   action {
@@ -183,7 +180,7 @@ resource "aws_lb_listener_rule" "web" {
 
   condition {
     host_header {
-      values = ["${var.tags.Component}.app-${var.environment}.${var.zone_name}"]
+      values = ["${var.tags.Component}.backend-${var.environment}.${var.zone_name}"]
     }
   }
 }

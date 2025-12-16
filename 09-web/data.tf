@@ -45,11 +45,7 @@ data "aws_ssm_parameter" "frontend_sg_id" {
   name  = "/${var.project}/${var.environment}/frontend_sg_id"
 }
 
-<<<<<<< HEAD
-data "aws_ssm_parameter" "web_alb_listener_arn" {
-  name  = "/${var.project}/${var.environment}/web_alb_listener_arn"
-=======
+
 data "aws_ssm_parameter" "frontend_alb_listener_arn" {
   name  = "/${var.project}/${var.environment}/frontend_alb_listener_arn"
->>>>>>> 41070bd (latest commit)
 }

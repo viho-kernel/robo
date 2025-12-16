@@ -21,11 +21,8 @@ variable "environment" {
 
 variable "zone_name" {
   default = "opsora.space"
-<<<<<<< HEAD
-=======
 }
 
 variable "zone_id" {
     default = "Z0837413U5UCNNDSOD1K"
->>>>>>> 41070bd (latest commit)
 }
